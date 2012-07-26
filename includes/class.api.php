@@ -495,9 +495,13 @@ class Api extends Basics {
 	 */
 	final protected function get_detailUrl_() {
 		$Request = $this->get_instance( 'Request' );
-		return ProjectUpdates::$sBaseUrl . '?action=project_details&slug='
+		$r = ProjectUpdates::$sBaseUrl . '?action=project_details&slug='
 			. $Request->slug . '&apikey=' . $Request->apikey
 			. '&branch=' . $Request->branch;
+		if( $Request->type === 'theme' ) {
+			$r .= '&type=theme';
+		}
+		return $r;
 	}
 
 	/**
