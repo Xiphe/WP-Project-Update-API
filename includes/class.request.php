@@ -67,6 +67,14 @@
 	public $branch;
 
 	/**
+	 * The type of the project.
+	 *
+	 * @access public
+	 * @var string
+	 */
+	public $type;
+
+	/**
 	 * The initiation
 	 *
 	 * @access public
