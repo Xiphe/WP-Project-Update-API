@@ -1,0 +1,6 @@
+globalSettings.json
+db.json
+cookies/*
+cache/*
+projectSettings/*
+temp/*

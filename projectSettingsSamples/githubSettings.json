@@ -1,0 +1,45 @@
+{
+/*
+ * General Settings:
+ */
+	"host" : "github",
+	"user" : "[github Read-Users login name]",
+	"projectOwner" : "[the username of the project owner]",
+
+/*
+ * Optional Settings:
+ */
+	/* Specify a folder name for the project. Default: slug */
+	// "folderName" : "[foldername]",
+	/* The info-file for this project - should be set to style.css for themes. Default: [slug].php */
+	// "info" : "[relative/file/path.php]",
+	/* The readme-file for this project. Default: readme.md */
+	// "readme" : "[relative/file/path.md]",
+	/* Password for the user with read access if user is not set in global config. */
+	// "password" : "[users Password]",
+
+/*
+ * Access Settings:
+ */
+	
+	/* Access for everyoe ! */
+	// "allowed" : "*"
+	
+	/* Access for specific people. */
+	"allowed" : [
+		{
+			/* [Yourname <you@example.org>] */
+			"ip" : [
+				"[ip address of the server requesting the updates]",
+				"[your ip address for testing the api results]",
+			],
+			"apikey" : [
+				"[a string that must be passed by request]",
+			],
+			"branch" : [
+				"master"
+				//, "some other branch"
+			]
+		}
+	]
+}

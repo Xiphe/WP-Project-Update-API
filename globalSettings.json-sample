@@ -1,0 +1,33 @@
+{
+	"baseUrl" : "http://[plugins.example.org]/api/",
+	"useCache" : true,
+	"renameFolders" : true,
+	"urls" : {
+		"github" : {
+			"files" : "https://raw.github.com/:projectOwner/:slug/:branch/:filepath",
+			"archive" : "https://nodeload.github.com/:projectOwner/:slug/zipball/:branch",
+			"commits" : "https://api.github.com/repos/:projectOwner/:slug/commits?per_page=1&sha=:branch"
+		},
+		"bitbucket" : {
+			"files" : "https://api.bitbucket.org/1.0/repositories/:projectOwner/:slug/raw/:branch/:filepath",
+			"archive" : "https://bitbucket.org/:projectOwner/:slug/get/:branch.zip",
+			"commits" : "https://api.bitbucket.org/1.0/repositories/:projectOwner/:slug/changesets/:branch?limit=1"
+		},
+		"[yourGitlabKey]" : {
+			"files" : "http://[gitlab.example.org]/:slug/:branch/blob?path=:filepath",
+			"archive" : "http://[gitlab.example.org]/:slug/repository/archive?ref=:branch",
+			"commits" : "http://[gitlab.example.org]/api/v2/projects/:slug/repository/branches?private_token=:token"
+		}
+	},
+	"users" : {
+		"bitbucket" : {
+			"[bitbucket Read-Users login name]" : "[bitbucket Read-Users password]"
+		},
+		"[yourGitlabKey]" : {
+			"[your Gitlab Read-Users email address]" : {
+				"pass" : "[your Gitlab Read-Users password]",
+				"token" : "[your Gitlab Read-Users private token]"
+			}
+		}
+	}
+}

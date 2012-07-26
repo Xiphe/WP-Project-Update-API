@@ -1,0 +1,30 @@
+body {
+	background: #fff;
+	font-family: helvetica, verdana, sans-serif;
+	color: #464646;
+	margin: 0;
+	font-size: 12px;
+}
+header {
+	color: #ccc;
+	background: #464646;
+	font-style: italic;
+	padding: 5px;
+}
+div[role=main] {
+	margin: 0 40px;
+}
+h1 {
+	padding: 0 0 10px;
+}
+h2 {
+	margin-top: 40px;
+}
+a {
+	color: #21759b;
+}
+a:hover,
+a:focus,
+a:active {
+	color: #d54e21;
+}
