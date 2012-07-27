@@ -1,4 +1,4 @@
-Project Update Api for Wordpress
+Project Update API for Wordpress
 ================================
 
 Handles Wordpress plugin and theme update requests by comparing the 
@@ -11,8 +11,8 @@ This is targeted to Wordpress plugin and theme developers who do not
 want to use the official Wordpress Plugin Directory for whatever
 reasons.  
 For example some might want to use GIT instead of SVN or want to
-keep the project private and only distrubute updates it to specific
-ip adresses or to requests containing a valid api key.
+keep the project private and only distribute updates it to specific
+IP-addresses or to requests containing a valid API key.
 
 It it possible to specify the branch on which the updates will be
 distributed so you can have a development branch and a live branch.
@@ -23,16 +23,27 @@ Version
 
 1.0.0
 
-_The projects class files are versioned itself and have their independant version._
+_The projects class files are versioned itself and have their independent version._
+
+
+Tested
+------
+
+* Tested with github and bitbucket in july 2012.
+* Tested with gitlab version 2.7.0 installed on debian.
+
+**not tested:**
+* Protected repositories on github.
+* Public repositories on bitbucket.
 
 
 Support
 -------
 
 I've written this project for my own needs so i am not willing to give
-full support. Anyway, im verry interested in any bugs, hints, requests
+full support. Anyway, i am very interested in any bugs, hints, requests
 or whatever. Please use the [github issue system](https://github.com/Xiphe/WP-Project-Update-API/issues)
-and i'll try to answer.
+and i will try to answer.
 
 
 Dependencys
@@ -54,8 +65,8 @@ and "renameFolders" to false.
 Installation
 ------------
 
-1. Make shure your webserver supports all the dependencys 
-2. Download or Clone the Project Files into a folder on your webserver.
+1. Make sure your web-server supports all the dependences.
+2. Download or Clone the Project Files into a folder on your web-server.
 3. Rename the globalSettings.json-sample to globalSettings.json
 4. Make your settings in globalSettings.json.
    See [Project Wiki - Global Settings](https://github.com/Xiphe/WP-Project-Update-API/wiki/Global-Settings)
@@ -78,14 +89,14 @@ Preparing your Plugin/Theme
 It is required that you change your plugin code so the update requests
 will not be send to wordpress.org but to your server.
 
-I am currently developing a wordpress subframework for handling this.
+I am currently developing a Wordpress sub-framework for handling this.
 Keep watching [THEUPDATES standalone](https://github.com/Xiphe/-THE-UPDATES-standalone)
 for more to come.
 
 I have not tested it but it should work as well with the plugin and 
 theme files of the [Automatic Theme & Plugin Updater](https://github.com/jeremyclark13/automatic-theme-plugin-update) from jeremyclark13.
-Which, btw can also be a grat alternative to this project if you 
-want to keep your plugin code completly on your server.
+Which, btw. can also be a great alternative to this project if you 
+want to keep your plugin code completely on your server.
 
 
 Props
@@ -99,10 +110,10 @@ Props
 * **[BitBucket API Library](https://bitbucket.org/steinerd/bitbucket-api-library/overview)**  
   by [Anthony Steiner](http://steinerd.com)
 
-Inspired means that i've seen these **brilliant projects**, started to use them
+Inspired means that i have seen these **brilliant projects**, started to use them
 and than started to write my own version with the intention to just have the
-functionality i realy use.  
-I got the idear of how things are working by analyzing and using the code of
+functionality i really use.  
+I got the idea of how things are working by analyzing and using the code of
 them and i can't say where i used snippets from these projects but they've
 influenced my code strongly.
 
@@ -127,18 +138,28 @@ This is the first release.
 
 Todo
 ----
- * Test with larger repositorys
+
+Here is a list of tasks that i think would be nice to have.
+But i did not took the time to build/test them.
+
+ * Test with larger repositories
  * Get gitlab https to work
- * Check protected Github + public Bitbucket
- * Add forceCacheLive option for relying on local cache for a specific timeframe
+ * Check protected github + public bitbucket
+ * Add forceCacheLive option for relying on local cache for a specific time frame
  * Add cronjob requests for checking cache and gitlab login.
  * Write tests
  * Spice up the theme detail page.
- * Check documentation for logical and spelling mistakes
  * Backend ;)
 
-Im not an native english speaker so please pardon any spelling or grammar mistakes.
-I'd realy love to get some feedback for eny errors in the documentation.
+
+This tasks are hard to me it would be nice if anyone can help:
+
+ * Check documentation for logical and spelling mistakes
+ * Check the code for security issues.
+ * Check the code for logic optimization.
+
+_I am not an native English speaker so please pardon any spelling or grammar mistakes._
+_I'd really love to get some feedback for any errors in the documentation._
 
 
 License
