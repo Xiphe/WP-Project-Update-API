@@ -1,7 +1,7 @@
 <?php 
 /**
  * Caching class handles the cache, converts gitlab tars into zip files
- * and renames the project dirs if needed.
+ * and renames the project directories if needed.
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
@@ -28,7 +28,7 @@ class Cache extends Basics {
 	private static $s_useCache;
 
 	/**
-	 * If the file shoud be written to cache.
+	 * If the file should be written to cache.
 	 *
 	 * @access private
 	 * @var boolean
@@ -36,7 +36,7 @@ class Cache extends Basics {
 	private static $s_writeCache = false;
 
 	/**
-	 * Saves all temp dirs created in runtime.
+	 * Saves all temp directories created in runtime.
 	 *
 	 * @access private
 	 * @var array
@@ -44,7 +44,7 @@ class Cache extends Basics {
 	private $_tempDirs = array();
 
 	/**
-	 * The cache dir for the current project
+	 * The cache directory for the current project.
 	 *
 	 * @access private
 	 * @var string
@@ -53,7 +53,7 @@ class Cache extends Basics {
 
 
 	/**
-	 * The initiation
+	 * The initiation.
 	 *
 	 * @access public
 	 * @return void
@@ -72,7 +72,7 @@ class Cache extends Basics {
 	 * checks if the file is available in cache and returns it or false if not.
 	 *
 	 * @access public
-	 * @param  string $key the filekey
+	 * @param  string $key the file-key
 	 * @return mixed       the file contents or false if file is not available.
 	 */
 	public function get_cachedFile( $key ) {
@@ -92,7 +92,7 @@ class Cache extends Basics {
 	 * Writes the file into the project cache folder if allowed to.
 	 *
 	 * @access public
-	 * @param  string $key      the filekey
+	 * @param  string $key      the file-key
 	 * @param  string $contents the files content
 	 * @return void
 	 */
@@ -176,10 +176,10 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Returns the projects cache dir and generates it if needed.
+	 * Returns the projects cache directory and generates it if needed.
 	 *
 	 * @access private
-	 * @return string the projects cache dir
+	 * @return string the projects cache directory
 	 */
 	private function _get_cacheDir() {
 		if( !isset( $this->_cacheDir ) ) {
@@ -191,17 +191,17 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Returns the base cache dir.
+	 * Returns the base cache directory.
 	 *
 	 * @access private
-	 * @return string the base dir.
+	 * @return string the base directory.
 	 */
 	private function _get_baseCacheDir() {
 		return dirname( dirname( __FILE__ ) ) . DS . 'cache' . DS;
 	}
 
 	/**
-	 * Tryes to delete the projects cache.
+	 * Tries to delete the projects cache.
 	 *
 	 * @access private
 	 * @return void
@@ -213,7 +213,7 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Recursive dir deletion.
+	 * Recursive directory deletion.
 	 * by http://www.php.net/manual/de/function.rmdir.php#108113
 	 *
 	 * @access private
@@ -231,7 +231,7 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Extracts the passed archive data into a temp dir.
+	 * Extracts the passed archive data into a temp directory.
 	 *
 	 * @access private
 	 * @param  string $archiveData the archive data
@@ -261,7 +261,7 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Renames the unpacked folder into slug or a foldername given by project settings.
+	 * Renames the unpacked folder into slug or a folder name given by project settings.
 	 *
 	 * @access private
 	 * @return void
@@ -273,7 +273,7 @@ class Cache extends Basics {
 		 && is_dir( $dirs[0] )
 		) {
 			/*
-			 * The archive already contained a subfolder - just rename it.
+			 * The archive already contained a sub-folder - just rename it.
 			 */
 			rename( $dirs[0], $final . DS . $this->get_instance( 'Data' )->get_folderName() );
 		} else {
@@ -306,10 +306,10 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Returns the path to a temporary dir and generates it if needed.
+	 * Returns the path to a temporary directory and generates it if needed.
 	 *
 	 * @access private
-	 * @return string temp dir path
+	 * @return string temp directory path
 	 */
 	private function _getTempDir( $key ) {
 		if( !isset( $this->_tempDirs[$key] ) ) {
@@ -324,7 +324,7 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * Build a unique foldername string for temp folders.
+	 * Build a unique folder name string for temp folders.
 	 *
 	 * Random String generation by
 	 *   http://www.noobis.de/developer/141-php-random-string-erzeugen.html
@@ -381,7 +381,7 @@ class Cache extends Basics {
 	}
 
 	/**
-	 * On shutdown: Check if a tempdir was generated and delete it.
+	 * On shutdown: Check if temp-directory have been generated and delete them.
 	 *
 	 * @access public
 	 * @return void.

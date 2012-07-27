@@ -48,7 +48,7 @@ class ProjectUpdates extends Basics {
 	// ERROR COUNTER: 31 - Just to know the last used error number.
 	
 	/**
-	 * The baseUrl of this script. Used to generate download- and detailviewlinks
+	 * The baseUrl of this script. Used to generate download- and detail-view links.
 	 * set in globalConfigs.json
 	 * 
 	 * @access public
@@ -76,7 +76,7 @@ class ProjectUpdates extends Basics {
 	public static $singleton = true;
 
 	/**
-	 * The currently used Api.
+	 * The currently used API.
 	 * 
 	 * @access public
 	 * @var object
@@ -101,7 +101,7 @@ class ProjectUpdates extends Basics {
 		$Data = $this->get_instance( 'Data' );
 
 		/*
-		 * Set BaseUrl and CacheFlag from global Config.
+		 * Set BaseUrl and CacheFlag from global config.
 		 */
 		self::$sBaseUrl = $Data->get_globalSetting( 'baseUrl' );
 		self::$sUseCache = $Data->get_globalSetting( 'useCache' );
@@ -111,7 +111,7 @@ class ProjectUpdates extends Basics {
 		 */
 		if( $this->get_instance( 'Request' )->validateRequest() ) {
 			/*
-			 * Initiates the Api for the current host.
+			 * Initiates the API for the current host.
 			 */
 			$this->get_api();
 
@@ -123,24 +123,24 @@ class ProjectUpdates extends Basics {
 			$this->get_instance( 'Cache' );
 
 			/*
-			 * Let the Api do it's job.
+			 * Let the API do it's job.
 			 */			
 			$this->Api->do_action();
 		}
 
 		/*
-		 * Fallback if the previous methods have not killed the script.
+		 * Fall-back if the previous methods have not killed the script.
 		 * should print the serialized "nothing happened" error array.
 		 */
 		$this->_exit();
 	}
 
 	/**
-	 * Determines if a specific Api exist for the current host and loads it
-	 * otherwhise fallback to the default api.
+	 * Determines if a specific API exist for the current host and loads it
+	 * otherwise fall-back to the default API.
 	 *
 	 * @access public
-	 * @return object the Api
+	 * @return object the API
 	 */
 	public function get_api() {
 		if( !is_object( $this->Api ) ) {

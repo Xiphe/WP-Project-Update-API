@@ -47,7 +47,7 @@ class Basics {
 	}
 
 	/**
-	 * Fallback for classes that does not need the init function
+	 * Fall-back for classes that does not need the init function
 	 *
 	 * @access public
 	 * @return void
@@ -79,12 +79,12 @@ class Basics {
 
 	/**
 	 * Handy function to dive into an array or object without knowing what it is
-	 * nested keys can be seperated by a pipe so it's possible to get a deeper
+	 * nested keys can be separated by a pipe so it's possible to get a deeper
 	 * key with only one call
 	 *
 	 * @access public
 	 * @param  mixed $obj   array or object
-	 * @param  string $path the key or keypath (foo|bar)
+	 * @param  string $path the key or key-path (foo|bar)
 	 * @return mixed        the keys value or null if not found
 	 */
 	final public function recursive_get( $obj, $path ) {	
@@ -109,7 +109,7 @@ class Basics {
 	 *
 	 * @access public
 	 * @param  mixed $obj   array or object
-	 * @param  string $path the key or keypath (foo|bar)
+	 * @param  string $path the key or key-path (foo|bar)
 	 * @return mixed        the keys value or null if not found
 	 */
 	final public function rget( $obj, $path ) {
@@ -123,9 +123,9 @@ class Basics {
 	 *
 	 * @access public
 	 * @param  mixed  &$obj   the array or object in which the data should be inserted
-	 * @param  string $path   the key or keypath (foo|bar|some|thing)
+	 * @param  string $path   the key or key-path (foo|bar|some|thing)
 	 * @param  mixed  $value  the variable to set to the end of the path
-	 * @param  string $type   the type of the new generated subkeys set to something other
+	 * @param  string $type   the type of the new generated sub-keys set to something other
 	 *                        than array or stdClass to prevent generation
 	 * @return mixed          the object with new data
 	 */
@@ -164,9 +164,9 @@ class Basics {
 	 *
 	 * @access public
 	 * @param  mixed  &$obj   the array or object in which the data should be inserted
-	 * @param  string $path   the key or keypath (foo|bar|some|thing)
+	 * @param  string $path   the key or key-path (foo|bar|some|thing)
 	 * @param  mixed  $value  the variable to set to the end of the path
-	 * @param  string $type   the type of the new generated subkeys set to something other
+	 * @param  string $type   the type of the new generated sub-keys set to something other
 	 *                        than array or stdClass to prevent generation
 	 * @return mixed          the object with new data
 	 */

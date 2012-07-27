@@ -1,6 +1,6 @@
 <?php
 /**
- * Main and Fallback API class handles the requests to remote hosts
+ * Main and fall-back API class handles the requests to remote hosts
  * and generates the results.
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
@@ -84,7 +84,7 @@ class Api extends Basics {
 	 */
 	public function do_basic_check() {
 		/*
-		 * Check the Request/installed version against the remote version.
+		 * Check the version passed in request against the remote version.
 		 */
 		if( version_compare(
 				$this->get_instance( 'Request' )->version,
@@ -95,7 +95,7 @@ class Api extends Basics {
 			$projectSettings = $this->get_instance( 'Data' )->projectSettings;
 
 			/*
-			 * New version exists. Check if the project is a theme (infofile = .css) or a plugin (.php).
+			 * New version exists. Check if the project is a theme (info-file = *.css) or a plugin (info-file = *.php).
 			 * And build the response.
 			 */
 			if( $this->get_instance( 'Request' )->type === 'theme' 
@@ -150,7 +150,7 @@ class Api extends Basics {
 
 	/**
 	 * Do the download_latest action by getting the archive string, setting the headers
-	 * and countung up the downloads.
+	 * and counting up the downloads.
 	 *
 	 * @access public
 	 * @return void
@@ -215,7 +215,7 @@ class Api extends Basics {
 	 */
 	public function get_info( $key ) {
 		/*
-		 * Check if the infofile was already parsed.
+		 * Check if the info-file was already parsed.
 		 */
 		if( !isset( $this->_info ) ) {
 			$file = $this->get_file_( 'info' );
@@ -246,7 +246,7 @@ class Api extends Basics {
 	 * Gets the latest commits sha from the current branch at current host.
 	 *
 	 * @access public
-	 * @return mixed the shar string or false if error.
+	 * @return mixed the sha string or false if error.
 	 */
 	public function get_currentCommitSha() {
 		$url = $this->get_url_( 'commits' );
@@ -268,8 +268,8 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Tryes to get the project archive from cache or calles get_archive()
-	 * and tryes to cache the result.
+	 * Tries to get the project archive from cache or calls get_archive()
+	 * and tries to cache the result.
 	 *
 	 * @access protected
 	 * @return string the archive string
@@ -348,10 +348,10 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Extracts sections from the readme file by cutting it at its headlines and appanding
+	 * Extracts sections from the readme file by cutting it at its headlines and appending
 	 * markdown to each section.
 	 * If the readme file is not a markdown file all of its content will be returned for the
-	 * "descrioption" section.
+	 * "description" section.
 	 *
 	 * @access protected
 	 * @return array the sections
@@ -401,7 +401,7 @@ class Api extends Basics {
 	 * Getter for current download count of the current project.
 	 *
 	 * @access protected
-	 * @return int downloadcount.
+	 * @return int download-count.
 	 */
 	final protected function get_Downloads_() {
 		$dl = $this->get_instance( 'Data' )
@@ -413,7 +413,7 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Sets the downloadcount +1 and saves it into the database.
+	 * Sets the download-count +1 and saves it into the database.
 	 *
 	 * @access protected
 	 * @return void.
@@ -430,9 +430,9 @@ class Api extends Basics {
 	 * Checks if the file is allowed and not already requested.
 	 *
 	 * @access protected
-	 * @param  string $key the filekey
+	 * @param  string $key the file-key
 	 * @return bool        true if the file is allowed but need to be requested from remote
-	 *                     false if the file is allready available.
+	 *                     false if the file is already available.
 	 */
 	final protected function get_file_( $key ) {
 		if( !in_array( $key, array( 'info', 'readme' ) ) ) {
@@ -452,10 +452,10 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Default method to get the requestd file from remote.
+	 * Default method to get the requested file from remote.
 	 *
 	 * @access protected
-	 * @param  string $fileUrl url to the file
+	 * @param  string $fileUrl URL to the file
 	 * @return string          the contents of the file.
 	 */
 	protected function realy_get_file_( $fileUrl ) {
@@ -475,10 +475,10 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Builds the download url.
+	 * Builds the download URL.
 	 *
 	 * @access protected
-	 * @return string the download url
+	 * @return string the download URL
 	 */
 	final protected function get_packageUrl_() {
 		$Request = $this->get_instance( 'Request' );
@@ -488,10 +488,10 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Boulds the detailview url.
+	 * Builds the detail-view URL.
 	 *
 	 * @access protected
-	 * @return string the detailview url
+	 * @return string the detail-view URL
 	 */
 	final protected function get_detailUrl_() {
 		$Request = $this->get_instance( 'Request' );
@@ -505,10 +505,10 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Gets the username and password for the current host.
+	 * Gets the user name and password for the current host.
 	 *
 	 * @access protected
-	 * @return array username and password
+	 * @return array user name, password and token if available.
 	 */
 	final protected function get_userData_() {
 		$projectSettings = $this->get_instance( 'Data' )->projectSettings;
@@ -544,11 +544,11 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Gets the requested url for the current project.
+	 * Gets the requested URL for the current project.
 	 *
 	 * @access protected
 	 * @param  string $key the urlKey
-	 * @return string      the url.
+	 * @return string      the URL.
 	 */
 	final protected function get_url_( $key ) {
 		$Data = $this->get_instance( 'Data' );
@@ -576,11 +576,11 @@ class Api extends Basics {
 	}
 
 	/**
-	 * Gets the file url for the passed filekey.
+	 * Gets the file URL for the passed file-key.
 	 *
 	 * @access private
-	 * @param  string $key the filekey
-	 * @return string      the fileurl
+	 * @param  string $key the file-key
+	 * @return string      the file-URL
 	 */
 	private function _getFileUrlFor( $key ) {
 		$projectSettings = $this->get_instance( 'Data' )->projectSettings;

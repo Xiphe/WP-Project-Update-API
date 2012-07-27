@@ -1,6 +1,6 @@
 <?php
 /**
- * Class for handeling the setting and db data
+ * Class for handling the setting and db data
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
@@ -64,7 +64,7 @@ class Data extends Basics {
 	 * Decodes the global settings from its file and returns the requested value.
 	 *
 	 * @access public
-	 * @param  string $key the key or keypath of the searched value (see Basics::recursive_get())
+	 * @param  string $key the key or key-path of the searched value (see Basics::recursive_get())
 	 * @return mixed       the requested value or null if not found.
 	 */
 	public function get_globalSetting( $key ) {
@@ -93,11 +93,11 @@ class Data extends Basics {
 	 * Getter for the project folder name.
 	 *
 	 * This is used by Cache::_checkTmpArchiveFolder() because github and bitbucket
-	 * are naming the project folder containting the commit sha and the user name
+	 * are naming the project folder containing the commit sha and the user name
 	 * and gitlab does not put the project files into a folder in the array.
 	 *
 	 * @access public
-	 * @return string the foldername
+	 * @return string the folder-name
 	 */
 	public function get_folderName() {
 		if( isset( $this->projectSettings->folderName ) ) {
@@ -111,7 +111,7 @@ class Data extends Basics {
 	 * Returns the requested value from database.
 	 *
 	 * @access public
-	 * @param  string $key the key or keypath of the searched value (see Basics::recursive_get())
+	 * @param  string $key the key or key-path of the searched value (see Basics::recursive_get())
 	 * @return mixed       the requested value or null if not found.
 	 */
 	public function get_DB( $key ) {
@@ -123,7 +123,7 @@ class Data extends Basics {
 	 * Sets a value in the database.
 	 *
 	 * @access public
-	 * @param  string $key   the key or keypath where the value should be set. (see Basics::recursive_set())
+	 * @param  string $key   the key or key-path where the value should be set. (see Basics::recursive_set())
 	 * @param  mixed  $value the value
 	 * @return object        returns the Data instance for chaining with Data::save()
 	 */
@@ -137,7 +137,7 @@ class Data extends Basics {
 	 * Saves the database.
 	 *
 	 * @access public
-	 * @return object returns itself for methodchaining.
+	 * @return object returns itself for method-chaining.
 	 */
 	public function save_DB() {
 		file_put_contents( dirname( __FILE__ ) . DS . '..' . DS . 'db.json', $this->_json_readable_encode( $this->_DB ) );
@@ -168,8 +168,8 @@ class Data extends Basics {
 			}
 
 			/*
-			 * Gitlab does not need the projectOwner setting but a globalkey because there is no
-			 * standard url for gitlab.
+			 * Gitlab does not need the projectOwner setting but a global-key because there is no
+			 * standard URL for gitlab.
 			 */
 			if( isset( $this->projectSettings->host )
 			 && $this->projectSettings->host === 'gitlab'
@@ -210,7 +210,7 @@ class Data extends Basics {
 	 *
 	 * by bohwaz http://www.php.net/manual/de/function.json-encode.php#102091
 	 * 
-	 * modyfyed codestyle to fit to the rest and logic from function to method
+	 * modified code-style to fit to the rest and changed logic from function to method
 	 * by Hannes Diercks, 2012
 	 * 
 	 * @access private

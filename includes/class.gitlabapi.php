@@ -1,6 +1,6 @@
 <?php
 /**
- * Extension of the basic api for gitlab
+ * Extension of the basic API for gitlab
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
@@ -22,7 +22,7 @@ class GitlabApi extends Api {
 	 * Gets the latest commits sha from the current branch at current host.
 	 *
 	 * @access public
-	 * @return mixed the shar string or false if error.
+	 * @return mixed the sha string or false if error.
 	 */
 	public function get_currentCommitSha() {
 		extract( $this->get_userData_() );
@@ -65,7 +65,7 @@ class GitlabApi extends Api {
 
 	/**
 	 * Overwrites the Api::realy_get_file_() method.
-	 * Tryes to login to gitlab and adds cookies to the request.
+	 * Tries to login to gitlab and adds cookies to the request.
 	 *
 	 * @access protected
 	 * @param  string $fileUrl the fileUrl
@@ -96,7 +96,7 @@ class GitlabApi extends Api {
 
 	/**
 	 * Overwrites the Api::get_archive_() method.
-	 * Tryes to login to gitlab and adds cookies to the request.
+	 * Tries to login to gitlab and adds cookies to the request.
 	 *
 	 * @access protected
 	 * @return string the archive content
@@ -131,7 +131,7 @@ class GitlabApi extends Api {
 	 * Gets the unique cookie file path for the current host.
 	 *
 	 * @access private
-	 * @return string path to the cookiefile
+	 * @return string path to the cookie-file
 	 */
 	private function _get_cookieFileName() {
 		return dirname( dirname( __FILE__ ) ) . DS . 'cookies' . DS . $this->_get_ID() . '.cookie';
@@ -148,7 +148,7 @@ class GitlabApi extends Api {
 	}
 
 	/**
-	 * checks if the response status is a rederection and resets the gitlab login.
+	 * checks if the response status is a redirection and resets the gitlab login.
 	 * 
 	 * @param  int  $status the response status
 	 * @return void
@@ -165,7 +165,7 @@ class GitlabApi extends Api {
 	}
 
 	/**
-	 * Tryes to connect to gitlab by programaticaly login to the normal frontend.
+	 * Tries to connect to gitlab by programmatically login to the normal front end.
 	 *
 	 * @access private
 	 * @param  integer $i counter for the login attempts
@@ -173,7 +173,7 @@ class GitlabApi extends Api {
 	 */
 	private function _connect_upGitlab( $i = 1 ) {
 		/*
-		 * Check if there was a sucsessful login within the last 24 hours
+		 * Check if there was a successful login within the last 24 hours
 		 * and just log in again if not.
 		 */
 		$lastConnection = $this->get_instance( 'Data' )->get_DB( 'lastGitlabConnections|' . $this->_get_ID() );
@@ -183,7 +183,7 @@ class GitlabApi extends Api {
 			$sucess = true;
 
 			/*
-			 * Get Userdata and delete CookieFile if existing. 
+			 * Get User-data and delete CookieFile if existing. 
 			 */
 			extract( $this->get_userData_() );
 			if( file_exists( $this->_get_cookieFileName() ) ) {
@@ -265,7 +265,7 @@ class GitlabApi extends Api {
 
 			if( $sucess ) {
 				/*
-				 * Third request for checking if the login was sucsessfull.
+				 * Third request for checking if the login was successful.
 				 */
 				$curl = curl_init();
 				curl_setopt( $curl, CURLOPT_URL, $baseUrl );
@@ -280,7 +280,7 @@ class GitlabApi extends Api {
 
 			if( ( $sucess === false || $status !== 200 ) && $i <= 3 ) {
 				/*
-				 * If the login was not sucessfull try another 2 times,
+				 * If the login was not successful try another 2 times,
 				 */
 				sleep( $i );
 				$i++;
@@ -292,8 +292,8 @@ class GitlabApi extends Api {
 				$this->_exit( 'error', 'Could not login to gitlab.' , 19 );
 			} else {
 				/*
-				 * Login was sucsessfull - save the current time into the database to prevent
-				 * other logins within the next 24 houres.
+				 * Login was successful - save the current time into the database to prevent
+				 * other logins within the next 24 hours.
 				 */
 				$this->get_instance( 'Data' )
 					->set_DB( 'lastGitlabConnections|' . $this->_get_ID(), time() )

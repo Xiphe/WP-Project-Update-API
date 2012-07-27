@@ -1,6 +1,6 @@
 <?php
 /**
- * Extension of the basic api for bitbucket
+ * Extension of the basic API for bitbucket
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
@@ -22,7 +22,7 @@ class BitbucketApi extends Api {
 	 * Gets the latest commits sha from the current branch at current host.
 	 *
 	 * @access public
-	 * @return mixed the shar string or false if error.
+	 * @return mixed the sha string or false if error.
 	 */
 	public function get_currentCommitSha() {
 		extract( $this->get_userData_() );
@@ -48,10 +48,10 @@ class BitbucketApi extends Api {
 
 	/**
 	 * Overwrites the Api::realy_get_file_() method.
-	 * This adds userdata into the request and checkes if they are valid.
+	 * This adds user-data into the request and checks if they are valid.
 	 *
 	 * @access protected
-	 * @param  string $fileUrl the files url
+	 * @param  string $fileUrl the files URL
 	 * @return string          the file content
 	 */
 	protected function realy_get_file_( $fileUrl ) {
@@ -76,7 +76,7 @@ class BitbucketApi extends Api {
 
 	/**
 	 * Overwrites the Api::get_archive_() method.
-	 * This adds userdata into the request and checkes if they are valid.
+	 * This adds user-data into the request and checks if they are valid.
 	 *
 	 * @access protected
 	 * @return string the archive content

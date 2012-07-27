@@ -1,6 +1,6 @@
 <?php 
 /**
- * Class for handeling the request data
+ * Class for handling the request data
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
@@ -35,7 +35,7 @@
 	public $action;
 
 	/**
-	 * The current apikey.
+	 * The current API-key.
 	 *
 	 * @access public
 	 * @var string
@@ -85,7 +85,7 @@
 	}
 
 	/**
-	 * Checks if the Request is authorized by comparing the apikey and ip-address
+	 * Checks if the Request is authorized by comparing the API-key and ip-address
 	 * with the data from project settings.
 	 *
 	 * @access public
@@ -144,7 +144,7 @@
 				}
 			}
 			$msg = 'No access. This can be because: 1. Your ip address (' . $_SERVER['REMOTE_ADDR'] . ') is not registered.'
-				. ' Or 2. your api key (' . $this->apikey . ') is invalid.'
+				. ' Or 2. your API-key (' . $this->apikey . ') is invalid.'
 				. ' Or 3. you do not have access to the requested branch (' . $this->branch . ').';
 				
 			$this->_exit( 'bad access', $msg, 17 );
@@ -162,7 +162,7 @@
 	 */
 	private function _checkRequest() {
 		if( self::$s_checkedRequest === false ) {
-			// Just take action, request & api-key ignore all other request values
+			// Just take action, request & API-key ignore all other request values
 			foreach( array( 
 				'action',
 				'apikey',

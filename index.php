@@ -1,6 +1,6 @@
 <?php
 /*
- Project Update Api for Wordpress
+ Project Update API for Wordpress
  Copyright (C) 2012 Hannes Diercks
 
  This program is free software; you can redistribute it and/or modify
@@ -20,7 +20,7 @@
 
 /* 
  * Uncomment the following line for benchmarking the run time of the script 
- * This will break the ability of wordpress to unserialize the response.
+ * This will break the ability of Wordpress to unserialize the response.
  * DO NOT USE IN PRODUCTION!
  */
 // $GLOBALS['pluginCheckerBench'] = microtime( true );
