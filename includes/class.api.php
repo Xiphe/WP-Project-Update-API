@@ -373,7 +373,7 @@ class Api extends Basics {
 
 			$r = array();
 			$c = preg_split(
-				'/([\w ]+)[\n|\r|\n\r]{1}[$^=|-]{2,}[\n|\r|\n\r]{2,}/',
+				'/([\w-_ ]+)[\n|\r|\n\r]{1,2}[$^=|-]{2,}[\n|\r|\n\r]{2,}/',
 				$rm,
 				-1,
 				PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE
