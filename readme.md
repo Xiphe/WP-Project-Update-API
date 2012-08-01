@@ -68,17 +68,23 @@ Installation
 1. Make sure your web-server supports all the dependences.
 2. Download or Clone the Project Files into a folder on your web-server.
 3. Rename the globalSettings.json-sample to globalSettings.json
-4. Make your settings in globalSettings.json.
+4. Rename db.json-rename to db.json
+5. Make sure your www-user can write to:
+   * cache folder
+   * cookies folder
+   * temp folder
+   * db.json file
+6. Make your settings in globalSettings.json.
    See [Project Wiki - Global Settings](https://github.com/Xiphe/WP-Project-Update-API/wiki/Global-Settings)
    for details.
-5. Setup your first project
+7. Setup your first project
 	1. Choose the appropriate file from /projectSettingsSamples folder.
 	2. Copy it into /projectSettings folder.
 	3. Rename it in [your Project Slug].json.
 	4. Insert the project data.
        See [Project Wiki - Project Settings](https://github.com/Xiphe/WP-Project-Update-API/wiki/Project-Settings)
        for details.
-6. Check if everything works by testing one of the api requests.
+8. Check if everything works by testing one of the api requests.
    See [Project Wiki - API Requests](https://github.com/Xiphe/WP-Project-Update-API/wiki/API-Requests)
    for documentation.
 
