@@ -21,7 +21,7 @@ distributed so you can have a development branch and a live branch.
 Version
 -------
 
-1.0.0
+1.0.1
 
 _The projects class files are versioned itself and have their independent version._
 
@@ -133,7 +133,13 @@ influenced my code strongly.
 Changelog
 ---------
 
-This is the first release.
+
+### 1.0.1
+* Added "remoteSlug" to documentation of optional project Settings.
+* Added the possibility to include The pear package "[File_Archive](http://pear.php.net/package/File_Archive/redirected)" from the projects folder. This way it is possible to change the package
+without affecting other projects relying on this package.
+The change might be required to address [this](https://github.com/Xiphe/WP-Project-Update-API/issues/1) issue.
+* Minor bugfixes and cosmetics.
 
 
 Todo

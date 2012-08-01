@@ -51,6 +51,14 @@ class Cache extends Basics {
 	 */
 	private $_cacheDir;
 
+	/**
+	 * Flag for extending the include path only once.
+	 *
+	 * @access private
+	 * @var boolean
+	 */
+	private $_extendedIncludePath = false;
+
 
 	/**
 	 * The initiation.
@@ -138,7 +146,6 @@ class Cache extends Basics {
 		} elseif( $this->get_instance( 'Data' )->projectSettings->host === 'gitlab' ) {
 			$archiveData = $this->_convertTarToZip( $archiveData );
 		}
-
 		$this->cacheFile( 'archive', $archiveData );
 	}
 
@@ -238,6 +245,8 @@ class Cache extends Basics {
 	 * @return void
 	 */
 	private function _extract( $archiveData ) {
+		$this->_extendIncludePath();
+
 		@include_once( 'File/Archive.php' );
 		if( !class_exists( 'File_Archive' ) ) {
 			$this->_exit( 'error', 'archive could not be converted. please install PEAR:File_Archive.', 26 );
@@ -361,6 +370,8 @@ class Cache extends Basics {
 	 * @return string       the .zip data
 	 */
 	private function _convertTarToZip( $archiveData ) {
+		$this->_extendIncludePath();
+		
 		@include_once( 'File/Archive.php' );
 		if( !class_exists( 'File_Archive' ) ) {
 			$this->_exit( 'error', 'archive could not be converted. please install PEAR:File_Archive.', 26 );
@@ -378,6 +389,20 @@ class Cache extends Basics {
 		$data = file_get_contents( $this->_getTempDir( 'tarconvert' ) . 'tmp.zip' );
 
 		return $data;
+	}
+
+	/**
+	 * Looks if PEAR::FILE_ARCHIVE is available in the projects include folder
+	 * and adds the projects include folder to phps include paths.
+	 *
+	 * @access private
+	 * @return void
+	 */
+	private function _extendIncludePath() {
+		if( !$this->_extendedIncludePath && is_dir( dirname( __FILE__ ) . DS . 'File' ) ) {
+			set_include_path( dirname( __FILE__ ) . ':' . get_include_path() );
+		}
+		$this->_extendedIncludePath = true;
 	}
 
 	/**
