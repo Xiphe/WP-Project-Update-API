@@ -5,7 +5,7 @@
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
- * @version 1.0.0
+ * @version 1.0.1
  * @link    https://github.com/Xiphe/WP-Project-Update-API/
  * @package WP Project Update API
  */
@@ -18,19 +18,6 @@ class Api extends Basics {
 	 * @var object
 	 */
 	public static $singleton = true;
-
-	/**
-	 * The allowed actions.
-	 *
-	 * @access private
-	 * @var array
-	 */
-	private static $s_allowedActions = array(
-		'basic_check',
-		'plugin_information',
-		'download_latest',
-		'project_details'
-	);
 
 	/**
 	 * Holds the project information parsed from remote info file.
@@ -67,13 +54,7 @@ class Api extends Basics {
 	 * @return void
 	 */
 	final public function do_action() {
-		$action = $this->get_instance( 'Request' )->action;
-
-		if( !in_array( $action, self::$s_allowedActions ) ) {
-			$this->_exit( 'error', 'Action "' . $action . '" is not allowed', 22 );
-		} else {
-			call_user_func( array( $this, 'do_' . $action ) );
-		}
+		call_user_func( array( $this, 'do_' .  $this->get_instance( 'Request' )->action ) );
 	}
 
 	/**

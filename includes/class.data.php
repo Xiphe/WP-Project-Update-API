@@ -186,7 +186,9 @@ class Data extends Basics {
 				}
 			}
 		} else {
-			$this->_exit( 'undefined', 'Project settings file not existing', 5 );
+			if( $this->get_instance( 'Request' )->action !== 'clean_cacheandtemp' ) {
+				$this->_exit( 'undefined', 'Project settings file not existing', 5 );
+			}
 		}
 	}
 

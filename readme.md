@@ -21,7 +21,7 @@ distributed so you can have a development branch and a live branch.
 Version
 -------
 
-1.0.1
+1.0.2
 
 _The projects class files are versioned itself and have their independent version._
 
@@ -131,7 +131,6 @@ influenced my code strongly.
   Original Markdown  
   Copyright (c) 2004-2006 [John Gruber](http://daringfireball.net/projects/markdown/)
 * **Random String generation** from [noobis.de](http://www.noobis.de/developer/141-php-random-string-erzeugen.html)
-* **Recursive dir deletion** from [php.net comments](http://www.php.net/manual/de/function.rmdir.php#108113)
 * **json_readable_encode** from [php.net comments](http://www.php.net/manual/de/function.json-encode.php#102091)  
   by bohwaz licensed under GNU/AGPLv3 or GPLv3
 * PEAR module **[File_Archive](http://pear.php.net/package/File_Archive/redirected)**
@@ -147,6 +146,12 @@ without affecting other projects relying on this package.
 The change might be required to address [this](https://github.com/Xiphe/WP-Project-Update-API/issues/1) issue.
 * Minor bugfixes and cosmetics.
 
+### 1.0.2
+* Internal change to the way the Request class gets its parameters from the request.
+* Added a "clean\_cacheandtemp" action (?action=clean_cacheandtemp&confirm=[yourPassword])  
+  The confirmation password can be set in globalSettings.json.
+* Added the filename to error outputs via _exit().
+* Recursive dir deletion now via readdir() instead of glob().
 
 Todo
 ----

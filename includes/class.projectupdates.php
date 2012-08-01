@@ -45,7 +45,7 @@
  * @package WP Project Update API
  */
 class ProjectUpdates extends Basics {
-	// ERROR COUNTER: 31 - Just to know the last used error number.
+	// ERROR COUNTER: 33 - Just to know the last used error number.
 	
 	/**
 	 * The baseUrl of this script. Used to generate download- and detail-view links.
@@ -93,7 +93,11 @@ class ProjectUpdates extends Basics {
 		/* 
 		 * At first check if all required arguments are passed by the request,
 		 */
-		$this->get_instance( 'Request' );
+		$Request = $this->get_instance( 'Request' );
+
+		if( $Request->action === 'clean_cacheandtemp' ) {
+			$this->get_instance( 'Cache' )->cleanCacheAndTemp();
+		}
 
 		/*
 		 * Initiate the Data Object. The initiation gets the current project settings.
@@ -109,7 +113,7 @@ class ProjectUpdates extends Basics {
 		/*
 		 * Check if the Request is valid and authorized.
 		 */
-		if( $this->get_instance( 'Request' )->validateRequest() ) {
+		if( $Request->validateRequest() ) {
 			/*
 			 * Initiates the API for the current host.
 			 */

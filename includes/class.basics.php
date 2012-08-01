@@ -66,8 +66,12 @@ class Basics {
 	 * @return void
 	 */
 	final public function _exit( $status = null, $msg = null, $errorCode = null ) {
+		$bt = debug_backtrace();
+		$file = basename( $bt[0]['file'] );
+		unset( $bt );
+
 		$slug = $this->get_instance( 'Request' )->slug;
-		foreach( array( 'status', 'msg', 'errorCode', 'slug' ) as $k ) {
+		foreach( array( 'status', 'msg', 'errorCode', 'slug', 'file' ) as $k ) {
 			if( $$k !== null ) {
 				self::$s_r[$k] = $$k;
 			}

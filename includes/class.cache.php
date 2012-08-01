@@ -5,7 +5,7 @@
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
- * @version 1.0.0
+ * @version 1.0.2
  * @link    https://github.com/Xiphe/WP-Project-Update-API/
  * @package WP Project Update API
  */
@@ -150,6 +150,34 @@ class Cache extends Basics {
 	}
 
 	/**
+	 * Method called by clean_cacheandtemp action.
+	 * Checks if the confirm password is ok and deletes the directories.
+	 *
+	 * @access public
+	 * @return void
+	 */
+	public function cleanCacheAndTemp() {
+		$DataPW = $this->get_instance( 'Data' )->get_globalSetting( 'cleanCacheAndTempPassword' );
+		if( is_string( $DataPW ) && $DataPW !== ''
+		 && $DataPW === $this->get_instance( 'Request' )->confirm ) {
+			// Clean TempDir
+			$this->_rrmdir( $this->_get_baseTempDir() );
+			if( !is_dir( $this->_get_baseTempDir() ) ) {
+				mkdir( $this->_get_baseTempDir() );
+			}
+
+			// Clean Cache
+			$this->_rrmdir( $this->_get_baseCacheDir() );
+			if( !is_dir( $this->_get_baseCacheDir() ) ) {
+				mkdir( $this->_get_baseCacheDir() );
+			}
+			$this->_exit( 'done', 'Cache and temp folders should be clean now.', 32 );
+		} else {
+			$this->_exit( 'no access', 'The confirm-password is not valid.', 32 );
+		}
+	}
+
+	/**
 	 * Checks if a sha is stored in db and compares it to the remotes last commit sha.
 	 * If they are the same cached files will be used.
 	 *
@@ -221,20 +249,26 @@ class Cache extends Basics {
 
 	/**
 	 * Recursive directory deletion.
-	 * by http://www.php.net/manual/de/function.rmdir.php#108113
 	 *
 	 * @access private
 	 * @param  string $dir the directory to be deleted
 	 * @return void
 	 */
 	private function _rrmdir( $dir ) {
-		foreach( glob( $dir . '/*' ) as $file ) {
-			if( is_dir( $file ) )
-				$this->_rrmdir( $file );
-			else
-				unlink( $file );
+		$dir = $this->slash( $dir, DS );
+		if( $handle = opendir( $dir ) ) {
+		    while( false !== ( $file = readdir( $handle ) ) ) {
+		    	if( $file === '.' || $file === '..' ) {
+		    		continue;
+		    	}
+		    	if( is_dir( $dir . $file ) )
+					$this->_rrmdir( $dir . $file );
+				else
+					@unlink( $dir . $file );
+		    }
+		    closedir($handle);
+		    @rmdir( $dir );
 		}
-		rmdir( $dir );
 	}
 
 	/**
@@ -328,6 +362,12 @@ class Cache extends Basics {
 		return $this->_tempDirs[$key] . DS;
 	}
 
+	/**
+	 * Returns the path to the root temp directory.
+	 *
+	 * @access private
+	 * @return string the temp directory.
+	 */
 	private function _get_rootTempDir() {
 		return dirname( dirname( __FILE__ ) ) . DS . 'temp' . DS;
 	}
@@ -355,11 +395,15 @@ class Cache extends Basics {
 			$i++;
 		}
 
-		if( !is_dir( ( $dir = dirname( dirname( __FILE__ ) ) . DS . 'temp' . DS . $name ) ) ) {
+		if( !is_dir( ( $dir = $this->_get_baseTempDir() . $name ) ) ) {
 			return $dir;
 		} else {
 			return $this->_get_uniqueTempFolderName();
 		}
+	}
+
+	private function _get_baseTempDir() {
+		return dirname( dirname( __FILE__ ) ) . DS . 'temp' . DS;
 	}
 
 	/**

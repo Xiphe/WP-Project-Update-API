@@ -4,7 +4,7 @@
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
- * @version 1.0.0
+ * @version 1.0.2
  * @link    https://github.com/Xiphe/WP-Project-Update-API/
  * @package WP Project Update API
  */
@@ -17,6 +17,43 @@
 	 * @var boolean
 	 */
 	private static $s_checkedRequest = false;
+
+	/**
+	 * The allowed actions + its required and optional parameters.
+	 *
+	 * @access private
+	 * @var array
+	 */
+	private static $s_allowedActions = array(
+		'basic_check' => array(
+			'!slug',
+			'!version',
+			'!apikey',
+			'branch',
+			'type'
+		),
+		'plugin_information' => array(
+			'!slug',
+			'!apikey',
+			'branch',
+			'type'
+		),
+		'download_latest'  => array(
+			'!slug',
+			'!apikey',
+			'branch',
+			'type'
+		),
+		'project_details'  => array(
+			'!slug',
+			'!apikey',
+			'branch',
+			'type'
+		),
+		'clean_cacheandtemp' => array(
+			'!confirm'
+		)
+	);
 
 	/**
 	 * Singleton holder.
@@ -161,49 +198,43 @@
 	 * @return void
 	 */
 	private function _checkRequest() {
-		if( self::$s_checkedRequest === false ) {
-			// Just take action, request & API-key ignore all other request values
-			foreach( array( 
-				'action',
-				'apikey',
-				'slug',
-				( isset( $_REQUEST['action'] ) && $_REQUEST['action'] == 'basic_check' 
-					? 'version' : null )
-			) as $k ) {
-				if( $k === null ) continue;
+		$this->action = preg_replace( '/[^A-Za-z0-9-_\.!]/', '', $_REQUEST['action'] );
 
-				if( !isset( $_REQUEST[ $k ] )
-				 && ( $k !== 'apikey' || !isset( $_REQUEST[ ( $k = 'api-key' ) ] ) )
-				) {
-					$this->_r['missing'] = $k;
-					$this->_exit( 'undefined', 'missing input', 8 );
-					// MINIMUM ONE KEY IS MISSING
+		if( !isset(  $_REQUEST['action'] )
+		 || !isset( self::$s_allowedActions[$_REQUEST['action']] )
+		) {
+			$this->_exit( 'error', 'Missing or invalid Action.', 33 );
+		}
+
+		foreach( self::$s_allowedActions[$_REQUEST['action']] as $param ) {
+			$required = false;
+			if( substr( $param, 0, 1 ) === '!' ) {
+				$required = true;
+				$param = substr( $param, 1, strlen( $param ) );
+			}
+
+			if( $required === true 
+			 && !isset( $_REQUEST[ $param ] )
+			 && ( $param !== 'apikey' || !isset( $_REQUEST[ ( $param = 'api-key' ) ] ) )
+			) {
+				$this->_r['missing'] = $param;
+				$this->_exit( 'undefined', 'missing input', 8 );
+				// MINIMUM ONE KEY IS MISSING
+			} else {
+				if( $param === 'apikey' || $param === 'api-key' ) {
+					if( isset( $_REQUEST[ $param ] ) ) {
+						$this->apikey = $_REQUEST[ $param ];
+					}
 				} else {
-					if( $k === 'apikey' || $k === 'api-key' ) {
-						$this->apikey = $_REQUEST[ $k ];
-					} else {
-						$this->$k = preg_replace( '/[^A-Za-z0-9-_\.!]/', '', $_REQUEST[ $k ] );
+					if( isset( $_REQUEST[ $param ] ) ) {
+						$this->$param = preg_replace( '/[^A-Za-z0-9-_\.!]/', '', $_REQUEST[ $param ] );
 					}
 				}
 			}
-
-			if( isset( $_REQUEST['branch'] ) ) {
-				$this->branch = preg_replace( '/[^A-Za-z0-9-_\.!]/', '', $_REQUEST['branch'] );
-			} else {
-				$this->branch = 'master';
-			}
-
-			if( isset( $_REQUEST['type'] ) && $_REQUEST['type'] === 'theme' ) {
-				$this->type = 'theme';
-			} else {
-				$this->type = 'plugin';
-			}
-
-			unset( $_REQUEST );
-			unset( $_POST );
-			unset( $_GET );
-
-			self::$s_checkedRequest = true;
 		}
+
+		unset( $_REQUEST );
+		unset( $_POST );
+		unset( $_GET );
 	}
 } ?>

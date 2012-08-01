@@ -2,7 +2,12 @@
 	"baseUrl" : "[http://plugins.example.org/api/]",
 	"useCache" : true,
 	"renameFolders" : true,
+	/* If you set a password here you can clean the cache and the temp folders by calling
+	 * ?action=clean_cacheandtemp&confirm=[yourPassword]
+	 */
+	// "cleanCacheAndTempPassword" : "",
 	"urls" : {
+		/* The github and bitbucket urls should work */
 		"github" : {
 			"files" : "https://raw.github.com/:projectOwner/:slug/:branch/:filepath",
 			"archive" : "https://nodeload.github.com/:projectOwner/:slug/zipball/:branch",
@@ -13,6 +18,7 @@
 			"archive" : "https://bitbucket.org/:projectOwner/:slug/get/:branch.zip",
 			"commits" : "https://api.bitbucket.org/1.0/repositories/:projectOwner/:slug/changesets/:branch?limit=1"
 		},
+		/* Here you need to add your gitlab host */
 		"[yourGitlabKey]" : {
 			"files" : "http://[gitlab.example.org]/:slug/:branch/blob?path=:filepath",
 			"archive" : "http://[gitlab.example.org]/:slug/repository/archive?ref=:branch",
