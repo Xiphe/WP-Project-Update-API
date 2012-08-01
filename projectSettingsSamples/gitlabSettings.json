@@ -19,6 +19,8 @@
 	// "password" : "[users Password]",
 	/* Private api token for the user with read access if user is not set in global config. */
 	// "token" : "[users private token]",
+	/* Set the slug for querying the project files on the remote server. Default: slug */
+	// "remoteSlug" : "[remoteSlug]",
 
 /*
  * Access Settings:

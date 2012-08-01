@@ -17,6 +17,8 @@
 	// "readme" : "[relative/file/path.md]",
 	/* Password for the user with read access if user is not set in global config. */
 	// "password" : "[users Password]",
+	/* Set the slug for querying the project files on the remote server. Default: slug */
+	// "remoteSlug" : "[remoteSlug]",
 
 /*
  * Access Settings:
