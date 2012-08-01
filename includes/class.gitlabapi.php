@@ -25,6 +25,8 @@ class GitlabApi extends Api {
 	 * @return mixed the sha string or false if error.
 	 */
 	public function get_currentCommitSha() {
+		$this->_connect_gitlab();
+		
 		extract( $this->get_userData_() );
 
 		if( !isset( $token ) ) {
@@ -72,7 +74,7 @@ class GitlabApi extends Api {
 	 * @return string          the file content
 	 */
 	protected function realy_get_file_( $fileUrl ) {
-		$this->_connect_upGitlab();
+		$this->_connect_gitlab();
 
 		extract( $this->get_userData_() );
 
@@ -102,7 +104,7 @@ class GitlabApi extends Api {
 	 * @return string the archive content
 	 */
 	protected function get_archive_() {
-		$this->_connect_upGitlab();
+		$this->_connect_gitlab();
 
 		extract( $this->get_userData_() );
 
@@ -171,7 +173,7 @@ class GitlabApi extends Api {
 	 * @param  integer $i counter for the login attempts
 	 * @return void
 	 */
-	private function _connect_upGitlab( $i = 1 ) {
+	private function _connect_gitlab( $i = 1 ) {
 		/*
 		 * Check if there was a successful login within the last 24 hours
 		 * and just log in again if not.
@@ -284,7 +286,7 @@ class GitlabApi extends Api {
 				 */
 				sleep( $i );
 				$i++;
-				return $this->_connect_upGitlab( $i );
+				return $this->_connect_gitlab( $i );
 			} elseif( $i > 3 ) {
 				/*
 				 * Not able to login after three attempts.
