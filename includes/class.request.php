@@ -101,7 +101,7 @@
 	 * @access public
 	 * @var string
 	 */
-	public $branch;
+	public $branch = 'master';
 
 	/**
 	 * The type of the project.
