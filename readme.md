@@ -21,7 +21,7 @@ distributed so you can have a development branch and a live branch.
 Version
 -------
 
-1.0.2
+1.0.3
 
 _The projects class files are versioned itself and have their independent version._
 
@@ -138,13 +138,8 @@ influenced my code strongly.
 Changelog
 ---------
 
-
-### 1.0.1
-* Added "remoteSlug" to documentation of optional project Settings.
-* Added the possibility to include The pear package "[File_Archive](http://pear.php.net/package/File_Archive/redirected)" from the projects folder. This way it is possible to change the package
-without affecting other projects relying on this package.
-The change might be required to address [this](https://github.com/Xiphe/WP-Project-Update-API/issues/1) issue.
-* Minor bugfixes and cosmetics.
+### 1.0.3
+* Supports now page-level DocBlocks before WP-project-info comment in the info-file.
 
 ### 1.0.2
 * Internal change to the way the Request class gets its parameters from the request.
@@ -152,6 +147,13 @@ The change might be required to address [this](https://github.com/Xiphe/WP-Proje
   The confirmation password can be set in globalSettings.json.
 * Added the filename to error outputs via _exit().
 * Recursive dir deletion now via readdir() instead of glob().
+
+### 1.0.1
+* Added "remoteSlug" to documentation of optional project Settings.
+* Added the possibility to include The pear package "[File_Archive](http://pear.php.net/package/File_Archive/redirected)" from the projects folder. This way it is possible to change the package
+without affecting other projects relying on this package.
+The change might be required to address [this](https://github.com/Xiphe/WP-Project-Update-API/issues/1) issue.
+* Minor bugfixes and cosmetics.
 
 Todo
 ----

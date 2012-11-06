@@ -5,7 +5,7 @@
  *
  * @copyright Copyright (c) 2012, Hannes Diercks
  * @author  Hannes Diercks <xiphe@gmx.de>
- * @version 1.0.1
+ * @version 1.0.3
  * @link    https://github.com/Xiphe/WP-Project-Update-API/
  * @package WP Project Update API
  */
@@ -204,12 +204,26 @@ class Api extends Basics {
 				$file = preg_split( '/\n/', $file );
 			}
 			$this->_info = array();
+
+			$hasFileDoc = false;
 			foreach( $file as $l ) {
-				if( count( ( $p = explode(':', $l, 2 ) ) ) > 1 ) {
+
+				if (!$hasFileDoc && count(($p = explode(':', $l, 2))) > 1) {
 					$this->_info[ preg_replace('/[^a-z0-9]/', '', strtolower( $p[0] )) ] = trim( $p [1] );
 				}
-				if( trim($l) == '*/' )
-					break;
+				
+				if (trim($l) == '/**') {
+					$hasFileDoc = true;
+				}
+
+				// Stop reading when the comment is closed.
+				if(trim($l) == '*/') {
+					if ($hasFileDoc) {
+						$hasFileDoc = false;
+					} else {
+						break;
+					}
+				}
 			}
 		}
 
