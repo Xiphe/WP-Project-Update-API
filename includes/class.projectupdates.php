@@ -90,6 +90,8 @@ class ProjectUpdates extends Basics {
 	 * @return void
 	 */
 	public function init() {
+		$Eggs = $this->get_instance( 'Easter' );
+
 		/* 
 		 * At first check if all required arguments are passed by the request,
 		 */
